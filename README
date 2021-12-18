@@ -1,0 +1,2 @@
+This is example CMake project demonstrating usage of ExternalProject module.
+It is used for building vendored copy of Boost and then "finding" it from the base project.
