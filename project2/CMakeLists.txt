@@ -30,7 +30,7 @@ function(BuildExternalProject target) # following arguments are passed to Extern
 endfunction()
 
 
-# Boost_ROOT variable is passed to boost and myproject
+# Boost_ROOT variable is used both in ExternalProject_Add() call and to limit search path of find_package(Boost)
 set(Boost_ROOT ${CMAKE_CURRENT_BINARY_DIR}/boost)
 
 BuildExternalProject(boost
@@ -46,5 +46,7 @@ BuildExternalProject(boost
 # Boost libraries built with runtime-link=static can only be found with Boost_USE_STATIC_RUNTIME
 # See boost/lib/cmake/Boost-1.78.0/BoostConfig.cmake for more details
 set(Boost_USE_STATIC_RUNTIME ON)
+find_package(Boost COMPONENTS system filesystem program_options thread date_time REQUIRED)
 
-add_subdirectory(src)
+add_executable(tut1 tut1.cpp)
+target_link_libraries(tut1 PRIVATE Boost::filesystem)
