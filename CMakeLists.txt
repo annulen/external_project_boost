@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.12)
 
 include(ExternalProject)
 
+# Boost_ROOT variable is used both in ExternalProject_Add() call and to limit search path of find_package(Boost)
 set(Boost_ROOT ${CMAKE_BINARY_DIR}/boost)
 
 ExternalProject_Add(boost
@@ -15,5 +16,7 @@ ExternalProject_Add(boost
     INSTALL_COMMAND    ""
 )
 
+# Boost libraries built with runtime-link=static can only be found with Boost_USE_STATIC_RUNTIME
+# See boost/lib/cmake/Boost-1.78.0/BoostConfig.cmake for more details
 set(Boost_USE_STATIC_RUNTIME ON)
 find_package(Boost COMPONENTS system filesystem program_options thread date_time REQUIRED)
