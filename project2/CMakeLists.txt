@@ -33,6 +33,7 @@ endfunction()
 # Boost_ROOT variable is used both in ExternalProject_Add() call and to limit search path of find_package(Boost)
 set(Boost_ROOT ${CMAKE_CURRENT_BINARY_DIR}/boost)
 
+# WARNING: Quotation marks (") must be escaped here because they are passed into file(WRITE)!
 BuildExternalProject(boost
     URL                \"https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.7z\"
     URL_HASH           SHA1=d0a8eebf466fe7f845bfc22c281dc1a692663b2d
