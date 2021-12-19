@@ -17,7 +17,12 @@ ExternalProject_Add(boost
     BYPRODUCTS         "${Boost_ROOT}/include" "${Boost_ROOT}/lib/libboost_filesystem.a"
 )
 
+add_library(Boost_filesystem INTERFACE)
+set_target_properties(Boost_filesystem PROPERTIES
+    INTERFACE_LINK_LIBRARIES "${Boost_ROOT}/lib/libboost_filesystem.a"
+    INTERFACE_INCLUDE_DIRECTORIES "${Boost_ROOT}/include"
+)
+
 add_executable(tut1 tut1.cpp)
-target_include_directories(tut1 PRIVATE "${Boost_ROOT}/include")
-target_link_libraries(tut1 PRIVATE "${Boost_ROOT}/lib/libboost_filesystem.a")
+target_link_libraries(tut1 PRIVATE Boost_filesystem)
 add_dependencies(tut1 boost)
