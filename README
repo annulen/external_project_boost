@@ -2,8 +2,15 @@ This is a collection of example CMake projects demonstrating different ways of b
 and using vendored copy of Boost.
 
 project1 and project2 use ExternalProject to build Boost with b2, then "find" it from
-the base project . The same approaches can be used for other 3rd party libraries
+the base project. SImilar approaches can be used for other 3rd party libraries
 which install their CMake integration files.
+
+project0 uses ExternalProject to build Boost with b2, and performs manual set up for
+"imported" Boost target. It's probably the most straightforward solution, however
+it doesn't use find_package() and therefore can be considered low-level and potentially
+fragile. However, this approach is the most generic: the same way can be used with any
+3rd party library, even if it doesn't provide CMake integration files or have
+a corresponding Find-module.
 
 project3 uses Orphis/boost-cmake (which internally uses FetchContent and builds source
 files of Boost as a part of "main" cmake project. See its CMakeLists.txt for more details.
