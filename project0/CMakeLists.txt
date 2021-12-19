@@ -26,3 +26,10 @@ set_target_properties(Boost_filesystem PROPERTIES
 add_executable(tut1 tut1.cpp)
 target_link_libraries(tut1 PRIVATE Boost_filesystem)
 add_dependencies(tut1 boost)
+
+# Note: instead of using intermediate Boost_filesystem target, you can do things more directly:
+#
+#   target_include_directories(tut1 PRIVATE "${Boost_ROOT}/include")
+#   target_link_libraries(tut1 PRIVATE "${Boost_ROOT}/lib/libboost_filesystem.a")
+#
+# However it can` lead to code repetition of you have many target linking to the same library
